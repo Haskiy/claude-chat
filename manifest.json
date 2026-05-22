@@ -1,0 +1,18 @@
+{
+  "name": "Claude Chat",
+  "short_name": "Claude",
+  "description": "使用 Claude AI 的聊天应用",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F2F2F7",
+  "theme_color": "#CC6B3C",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
