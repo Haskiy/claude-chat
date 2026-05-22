@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#D9885C"/>
+      <stop offset="100%" stop-color="#CC6B3C"/>
+    </linearGradient>
+  </defs>
+  <rect width="1024" height="1024" rx="224" fill="url(#bg)"/>
+  <g transform="translate(512,512)">
+    <!-- Message bubble icon -->
+    <path d="M-180-40 C-180-100 -120-160 -40-160 L40-160 C120-160 180-100 180-40 L180-20 C180-40 140-80 80-100 L40-160" fill="none" stroke="white" stroke-width="32" stroke-linecap="round"/>
+    <path d="M-120-80 L-60-80 M-120-40 L20-40 M-120 0 L-20 0" stroke="white" stroke-width="24" stroke-linecap="round"/>
+    <circle cx="100" cy="40" r="40" fill="white" opacity="0.9"/>
+    <path d="M85-10 L115-10 L115-20 L130-5 L115 10 L115 0 L85 0 Z" fill="#CC6B3C"/>
+  </g>
+</svg>
