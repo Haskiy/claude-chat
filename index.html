@@ -94,7 +94,7 @@
     -webkit-tap-highlight-color: transparent;
     display: flex; align-items: center; gap: 6px;
   }
-  .nav-btn svg { width: 22px; height: 22px; fill: var(--accent); }
+  .nav-btn svg { width: 22px; height: 22px; fill: var(--accent); pointer-events: none; }
   .nav-left { min-width: 60px; }
   .nav-right { min-width: 60px; display: flex; justify-content: flex-end; gap: 4px; }
   .nav-center { flex: 1; text-align: center; }
@@ -227,7 +227,7 @@
   }
   .send-btn:active { transform: scale(0.9); }
   .send-btn:disabled { opacity: 0.3; }
-  .send-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 2px; }
+  .send-btn svg { width: 18px; height: 18px; fill: #fff; margin-left: 2px; pointer-events: none; }
 
   /* ===== Settings Overlay ===== */
   .overlay {
@@ -508,6 +508,7 @@ const clearChatBtn = $('clearChatBtn');
 const toast = $('toast');
 const hintText = $('hintText');
 const hintLink = $('hintLink');
+const configHint = document.getElementById('configHint');
 
 // ===== Storage =====
 function loadState() {
