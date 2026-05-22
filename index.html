@@ -121,8 +121,17 @@
     font-size: 13px; color: var(--text-secondary);
     background: var(--surface); padding: 12px 20px;
     border-radius: 12px; border: 0.5px solid var(--border);
+    touch-action: manipulation;
   }
   .config-hint .link { color: var(--accent); cursor: pointer; font-weight: 500; }
+  .config-hint .link-btn {
+    display: inline; color: var(--accent); font-weight: 600;
+    text-decoration: underline; text-underline-offset: 2px;
+    background: none; border: none; font: inherit; font-size: inherit;
+    padding: 4px 2px; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+  }
 
   /* ===== Message Bubbles ===== */
   .msg-group { margin-bottom: 6px; display: flex; flex-direction: column; }
@@ -396,7 +405,7 @@
       <h2>Claude 聊天</h2>
       <p>开始一段对话吧</p>
       <div class="config-hint" id="configHint">
-        <span id="hintText">请先 <span class="link" id="hintLink">设置 API Key</span></span>
+        <span id="hintText">请先 <button class="nav-btn link-btn" id="hintLink">设置 API Key</button></span>
       </div>
     </div>
     <div id="messages" style="display:none"></div>
@@ -650,11 +659,9 @@ function renderMessages(animate = false) {
     clearBtn.style.display = 'none';
 
     if (state.apiKey) {
-      hintText.innerHTML = '开始输入消息吧';
+      hintText.textContent = '开始输入消息吧';
     } else {
-      hintText.innerHTML = '请先 <span class="link" id="hintLink">设置 API Key</span>';
-      const newHintLink = $('hintLink');
-      if (newHintLink) newHintLink.onclick = openSettings;
+      hintText.innerHTML = '请先 <button class="nav-btn link-btn" id="hintLink">设置 API Key</button>';
     }
     return;
   }
@@ -853,6 +860,7 @@ function openSettings() {
   apiKeyInput.value = state.apiKey;
   updateKeyButtons();
   renderModels();
+  setTimeout(() => apiKeyInput.focus(), 350);
 }
 
 function closeSettings() {
@@ -906,7 +914,7 @@ function init() {
   renderMessages();
 
   if (state.apiKey) {
-    hintText.innerHTML = '开始输入消息吧';
+    hintText.textContent = '开始输入消息吧';
   }
 
   // Input handling
@@ -938,7 +946,7 @@ function init() {
     updateKeyButtons();
     showToast('API Key 已保存');
     if (state.messages.length === 0) {
-      hintText.innerHTML = '开始输入消息吧';
+      hintText.textContent = '开始输入消息吧';
     }
   });
 
@@ -950,18 +958,19 @@ function init() {
     updateKeyButtons();
     showToast('API Key 已清除');
     if (state.messages.length === 0) {
-      hintText.innerHTML = '请先 <span class="link" id="hintLink">设置 API Key</span>';
-      const newHintLink = $('hintLink');
-      if (newHintLink) newHintLink.onclick = openSettings;
+      hintText.innerHTML = '请先 <button class="nav-btn link-btn" id="hintLink">设置 API Key</button>';
     }
   });
 
   clearBtn.addEventListener('click', clearChat);
   clearChatBtn.addEventListener('click', clearChat);
 
-  // Hint link
-  const hintLinkEl = $('hintLink');
-  if (hintLinkEl) hintLinkEl.addEventListener('click', openSettings);
+  // Click config hint to open settings (event delegation)
+  configHint.addEventListener('click', (e) => {
+    if (!state.apiKey && state.messages.length === 0) {
+      openSettings();
+    }
+  });
 
   // Focus input on tap
   document.addEventListener('touchstart', () => {
